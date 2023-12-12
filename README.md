@@ -1,2 +1,1 @@
-# MLOPS_1
-ML Project with MLOPS practices
+# Generic MLOPS End to End  Project
