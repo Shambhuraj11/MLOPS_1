@@ -25,27 +25,25 @@ class ModelTrainer:
     def __init__(self) -> None:
         self.model_trainer_config=ModelTrainerConfig()
     
-    def initiate_model_training(self,train_arr,test_arr):
+    def initiate_model_trainer(self,train_arr,test_arr):
         try:
             logging.info("Splitting Train and Test input Data")
+            # print(train_arr[:,:-1].shape)
             x_train,y_train,x_test,y_test=(
-                train_arr[:,:,-1],
+                train_arr[:,:-1],
                 train_arr[:,-1],
-                test_arr[:,:,-1],
+                test_arr[:,:-1],
                 test_arr[:,-1]
             )
 
-            models={
-                "Random Forest":RandomForestRegressor(),
-                "Decision Tree":DecisionTreeRegressor(),
-                "Gredient Boosting": GradientBoostingRegressor(),
-                "KNN Regressor":KNeighborsRegressor(),
+            models = {
+                "Random Forest": RandomForestRegressor(),
+                "Decision Tree": DecisionTreeRegressor(),
+                "Gradient Boosting": GradientBoostingRegressor(),
+                "Linear Regression": LinearRegression(),
+                "XGBRegressor": XGBRegressor(),
+                "CatBoosting Regressor": CatBoostRegressor(verbose=False),
                 "AdaBoost Regressor": AdaBoostRegressor(),
-                "GredientBoost Regressor":GradientBoostingRegressor(),
-                "XGBoost Regressor":XGBRegressor(),
-                'Linear Regression':LinearRegression(),
-                "CatBoost Regressor":CatBoostRegressor(verbose=True)
-            
             }
 
             params={

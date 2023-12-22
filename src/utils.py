@@ -26,7 +26,7 @@ def evaluate_model(x_train,y_train,x_test,y_test,models,param):
 
         for i in range(len(list(models))):
             model=list(models.values())[i]
-            para=param[list(model.keys())[i]]
+            para=param[list(models.keys())[i]]
 
             gs=GridSearchCV(model,para,cv=3)
             gs.fit(x_train,y_train)
@@ -45,3 +45,10 @@ def evaluate_model(x_train,y_train,x_test,y_test,models,param):
     except Exception as e:
         raise CustomException(e,sys)
 
+def load_object(model_path:str):
+    try:
+        with open(model_path,"rb") as f:
+            return dill.load(f) 
+        
+    except Exception as e:
+        raise CustomException(e,sys)
